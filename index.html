@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flash Cards 2</title>
+    <link rel="icon" href="flash-cards-clipart.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link id="mySheet" rel="stylesheet" href="FlashCards2Light.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-light navbar-expand-lg sticky-top">
+        <div class="container fluid">
+            <a class="navbar-brand" id="brand"><b>Flash Card Tool</b></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggler">
+                <ul class="nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item logged-in" style="display: none">
+                        <a class="nav-link h5" href="#" id="addCardButton" title="Add a new card.">Add Card</a>
+                    </li>
+                    <li class="nav-item logged-in" style="display: none">
+                        <a class="nav-link h5" href="#" id="sortButton" title="Sort your cards.">Sort Cards</a>
+                    </li>
+                    <li class="nav-item logged-in" style="display: none">
+                        <a class="nav-link h5" href="#" id="themeToggler" title="Switch between dark and light theme.">Switch to Dark Mode</a>
+                    </li>
+                    <li class="nav-item logged-in" style="display: none">
+                        <a class="nav-link h5" href="#" id="accountDetails" title="View your account details or sign out.">Account</a>
+                    </li>
+                    <li class="nav-item logged-out" style="display: none">
+                        <a class="nav-link h5" href="#" id="login" title="Log in to Flash Cards Tool.">Login</a>
+                    </li>
+                    <li class="nav-item logged-out" style="display: none">
+                        <a class="nav-link h5" href="#" id="signup" title="Sign up to save your cards to an account.">Sign Up</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cards Render Here -->
+    <div class="flashCardsList"></div>
+    <div class="noCards"></div>
+
+    <!-- Add Modal -->
+    <div class="add-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Add New Card</h3></div>
+            <div class="modal-body">
+                <form class="form" id="add-form" autocomplete="off">
+                    <input type="text" name="title" placeholder="Title" title="Your new card's title.">
+                    <textarea name="desc" placeholder="Description (max 500 characters)" maxlength="500" title="Your new card's description."></textarea>
+                    <button class="btn btn-modal" title="Submit this card's information.">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Details Modal-->
+    <div class="details-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Card Details</h3></div>
+            <div class="modal-body">
+                <div class="card-info-details">
+                    <p id="detailsModalTitle"><b>Title:</b></p>
+                    <p id="detailsModalDesc"><b>Description:</b></p>
+                    <p id="detailsModalTimestampCreated"><b>Date Created:</b></p>
+                    <p id="detailsModalTimestampModified"><b>Last Modified:</b></p>
+                </div><br>
+                <button class="btn btn-modal close-details-btn" title="Close this modal.">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Edit Modal -->
+    <div class="edit-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Edit Card</h3></div>
+            <div class="modal-body">
+                <form class="form" autocomplete="off">
+                    <input type="text" name="title" placeholder="Title" title="Your card's new title.">
+                    <textarea name="desc" placeholder="Description (max 500 characters)" maxlength="500" title="Your card's new description."></textarea>
+                    <button class="btn btn-modal" title="Save these details and overwrite this card's current details.">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="delete-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Delete Card?</h3></div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete this card?</p>
+                <div class="card-info-delete">
+                    <p id="deleteModalTitle"><b>Title:</b></p>
+                    <p id="deleteModalDesc"><b>Description:</b></p>
+                    <p id="deleteModalTimestampCreated"><b>Date Created:</b></p>
+                    <p id="deleteModalTimestampModified"><b>Last Modified:</b></p>
+                </div><br>
+                <button class="btn btn-secondary-modal" title="Close this modal without deleting.">Cancel</button>
+                <button class="btn btn-delete-modal" title="Permanently delete this card.">Delete</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sort Modal -->
+    <div class="sort-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Sort Cards</h3></div>
+            <div class="modal-body">
+                <button class="btn btn-modal-sort alphaAsc" title="Sort these cards by title, in alphabetical order.">Alphabetically By Title (A-Z)</button><br>
+                <button class="btn btn-modal-sort alphaDesc" title="Sort these cards by title, in reverse alphabetical order.">Alphabetically By Title (Z-A)</button><br>
+                <button class="btn btn-modal-sort createdAsc active" title="Sort these cards by date Created, from oldest to newest. Cards are sorted like this by default.">By Date Created, Ascending</button><br>
+                <button class="btn btn-modal-sort createdDesc" title="Sort these cards by date created, from newest to oldest.">By Date Created, Descending</button><br>
+                <button class="btn btn-modal-sort editedAsc" title="Sort these cards by last modified, from least to most recent.">By Last Modified, Ascending</button><br>
+                <button class="btn btn-modal-sort editedDesc" title="Sort these cards by last modified, from most to least recent.">By Last Modified, Descending</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="modal-signup" class="signup-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Sign Up</h3></div>
+            <div class="modal-body">
+                <form id="signup-form">
+                    <div class="input-field">
+                        <input type="email" id="signup-email" placeholder="Email address" autocomplete="off" title="The email address you would like to associate with your account. This cannot be changed later." required>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="signup-password" placeholder="Choose password (min. 6 characters)" title="The password you would like to use to secure your account. Choose a unique password you can remember." required>
+                    </div>
+                    <button class="btn btn-modal" style="width:6rem" title="Confirm these details.">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="modal-login" class="login-modal modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Login</h3></div>
+            <div class="modal-body">
+                <form id="login-form">
+                    <div class="input-field">
+                        <input type="email" id="login-email" placeholder="Email address" title="The email address you used to sign up." required>
+                    </div>
+                    <div class="input-field">
+                        <input type="password" id="login-password" placeholder="Your password" title="The password associated with your account." required>
+                    </div>
+                    <a href="#" class="resetPassword">Forgot Password?</a><br>
+                    <button class="btn btn-modal" title="Log in to Flash Cards Tool.">Login</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Details Modal -->
+    <div id="modal-account" class="modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header">
+                <h4>Account Details</h4>
+            </div>
+            <div class="modal=body" style="padding:1rem">
+                <div class="account-details"></div>
+                <button class="btn btn-modal-logout" href="#" id="logout" title="Log out of Flash Cards Tool.">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Password Reset Modal -->
+    <div id="modal-reset-pw" class="modal-wrapper">
+        <div class="myModal">
+            <div class="modal-header"><h3>Reset Password</h3></div>
+            <div class="modal-body" style="padding:1rem">
+                <p id="flavortext">Enter the email address associated with your account. We will send you an email with further instructions.</p>
+                <form id="email-form">
+                    <div class="input-field">
+                        <input type="email" id="resetPwEmail" placeholder="Email address" title="Your account's email address." autocomplete="off" required>
+                    </div>
+                    <button class="btn btn-modal" href="#" id="submitResetEmail" title="Send email.">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Email Verification Popup -->
+    <div id="modal-email-ver" class="modal-wrapper">
+        <div class="myModal">
+            <div class="modal-body" style="padding:1rem">
+                <p id="flavortext">We have sent an email to the address you provided. If you do not receive the email, please confirm your email address is correct. No further action is required at this time.</p>
+                <button class="btn btn-secondary-modal" href="#" id="closeEmailVerModal" title="Close this popup.">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirm Password Reset Popup -->
+    <div id="modal-reset-pw-confirm" class="modal-wrapper">
+        <div class="myModal">
+            <div class="modal-body" style="padding:1rem">
+                <p id="flavortext">We have sent an email to the address you provided. Follow the email's instructions to reset your password.</p>
+                <button class="btn btn-secondary-modal" href="#" id="closePwResetConfirmModal" title="Close this popup.">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.21.0/firebase-firestore.js"></script>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDPoRVOhq-1mzAIPLaAil7wQbXFHZHL8HQ",
+            authDomain: "flash-cards-7da68.firebaseapp.com",
+            projectId: "flash-cards-7da68",
+            storageBucket: "flash-cards-7da68.appspot.com",
+            messagingSenderId: "1000188874792",
+            appId: "1:1000188874792:web:211ecb57178110b16c251d"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="FlashCards2Script.js"></script>
+    <script src="FlashCards2Auth.js"></script>
+</body>
+</html>

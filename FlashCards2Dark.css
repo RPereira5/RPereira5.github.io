@@ -1,0 +1,369 @@
+:root {
+    --primary-color: rgb(47, 158, 202);
+    --secondary-color: rgb(255, 85, 85);
+    --bckg-color: rgb(39, 39, 39);
+    --open-accordion-color: rgb(70, 70, 70);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--bckg-color);
+}
+
+.container .fluid {
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    width: 100%;
+    background-color: var(--primary-color);
+    padding: 1rem;
+}
+
+.navbar {
+    justify-content: center;
+}
+
+#brand {
+    color: var(--bckg-color);
+    margin-left: 1.5rem;
+    font-size: 2rem; 
+}
+
+.h5 {
+    margin-bottom: 0;
+}
+
+.flashCardsList {
+    width: 90%;
+    margin: 2rem auto;
+    border-collapse: collapse;
+}
+
+.btn {
+    background: transparent;
+    width: 5rem;
+    height: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    outline: none;
+    margin: 3px;
+}
+
+.btn-edit {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-edit:hover {
+    background: var(--primary-color);
+    color: var(--bckg-color);
+}
+
+.btn-details {
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.btn-details:hover {
+    background: var(--primary-color);
+    color: var(--bckg-color);
+}
+
+.btn-delete {
+    color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.btn-delete:hover {
+    background: var(--secondary-color);
+    color: var(--bckg-color);
+}
+
+.btn-add {
+    width: 6rem;
+    height: 2rem;
+    background: var(--primary-color);
+    border: none;
+    color: var(--bckg-color);
+    margin: auto;
+}
+
+@keyframes animatetop {
+    from {
+      top: -300px; opacity: 0;
+    }
+    to {
+      top: 0; opacity: 1;
+    }
+}
+
+.modal-wrapper {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #24232354;
+    display: none;
+}
+
+.modal-content {
+    background: rgb(58, 58, 58);
+}
+
+.myModal {
+    position: relative;
+    background-color: rgb(80,80,80);
+    text-align: center;
+    width: 25rem;
+    margin: 5rem auto;
+    -webkit-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 4px 22px -6px rgba(0,0,0,0.75);
+    animation-name: animatetop;
+    animation-duration: .4s;
+}
+
+.modal-header {
+    background: rgb(58, 58, 58);
+    padding: 2rem;
+    color: #fff;
+    border: var(--bckg-color);
+}
+  
+.modal-body {
+    padding: 2rem;
+    background: rgb(80, 80, 80);
+    color: #fff;
+}
+
+.modal-footer {
+    border: var(--bckg-color);
+}
+  
+.btn-modal {
+    background: var(--primary-color);
+    border: none;
+    color: #fff;
+}
+
+.btn-delete-modal {
+    background: var(--secondary-color);
+    border: none;
+    color: #fff;
+}
+
+.modal-show {
+    display: block;
+}
+
+input {
+    width: 100%;
+    height: 2.2rem;
+    margin-bottom: 1rem;
+    text-indent: 0.5rem;
+    outline: none;
+}
+
+textarea {
+    width: 100%;
+    height: 35px;
+    margin-bottom: 1rem;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    padding-left: 9px;
+    scroll-padding-bottom: auto;
+    outline: none;
+}
+
+.accordion-body {
+    background-color: var(--bckg-color);
+    color: #fff;
+    outline: none;
+    border-bottom: 3px solid var(--bckg-color);
+}
+
+.nav-link, .nav-link:visited, .nav-link:focus {
+    text-decoration: none;
+    color: #fff;
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.nav-link:hover {
+    color: rgb(85, 85, 85);
+}
+
+.accordion-button {
+    color: #fff;
+    padding: 1.75rem, 1.25rem;
+}
+.accordion-header {
+    background-color: var(--bckg-color);
+}
+
+.accordion-flush .accordion-item .accordion-button {
+    border-radius: 5px;
+}
+
+.accordion-button:not(.collapsed) {
+    color: #fff;
+    background-color: rgb(50, 50, 50);
+}
+
+.accordion-button.collapsed {
+    background-color: rgb(50, 50, 50);
+    border-bottom: 3px solid var(--bckg-color);
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgb(90 90 90 / 25%)
+}
+  
+.vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.card-info-details {
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.card-info-delete {
+    border: 2px solid var(--secondary-color);
+    background-color: rgba(236, 49, 49, 25%);
+    text-align: left;
+    padding: 0.5rem;
+}
+
+.accordion-button::after {
+    background-image: url("accordion_button_lite.svg");
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("accordion_button_lite.svg");
+    transform: rotate(-180deg);
+}
+
+.btn-modal-sort {
+    background-color: transparent;
+    width: 19rem;
+    height: 2rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    outline: none;
+    margin: 3px;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-modal-sort:hover {
+    background: var(--primary-color);
+    color: rgb(60, 60, 60);
+}
+
+.active {
+    background: var(--primary-color);
+    color: rgb(60, 60, 60);
+}
+
+.btn-add:hover {
+    color: #fff;
+}
+
+.navbar-collapse {
+    flex-grow: 0;
+    padding-left: 0.5rem;
+}
+
+.btn-secondary-modal {
+    background-color: rgb(58, 58, 58);
+    color: #fff;
+}
+
+.bold {
+    color: var(--primary-color);
+    font-weight: bolder;
+    cursor: pointer;
+}
+
+.noCardsText {
+    color: #ffffff9c;
+}
+
+.btn-modal-logout {
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-modal-logout:hover {
+    background-color: var(--secondary-color);
+    color: rgb(60, 60, 60);
+}
+
+.account-details {
+    padding-bottom: 0.25rem;
+    color: #fff;
+}
+
+h4, h3, .h4, .h3 {
+    margin-bottom: 0px;
+}
+
+.span-link {
+    text-decoration: none;
+    color: #ffffff9c;
+    font-weight: 600;
+}
+
+.span-link:hover {
+    color: #ffffff9c;
+}
+
+.resetPassword {
+    text-decoration: none;
+    color: #ffffff9c;
+}
+
+.resetPassword:hover {
+    color: #ffffffc9;
+}
+
+#flavortext {
+    font-size: 14px;
+    color: rgb(99, 99, 99);
+}
+
+@media (min-width: 1400px) {.container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    max-width: 2500px;
+}}
+
+@media (min-width: 1200px) {.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 2500px;
+}}
+
+@media (min-width: 992px) {.container, .container-lg, .container-md, .container-sm {
+    max-width: 2500px;
+}}
+
+@media (min-width: 768px) {.container, .container-md, .container-sm {
+    max-width: 2500px;
+}}
+
+@media (min-width: 576px) {.container, .container-sm {
+    max-width: 2500px;
+}}
